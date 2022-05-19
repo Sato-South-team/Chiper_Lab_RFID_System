@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Chiper_Lab_RFID_System"
+             x:Class="Chiper_Lab_RFID_System.MainPage"  BackgroundImage="BackGround.jpg" Appearing="ContentPage_Appearing">
+
+    <StackLayout>
+        <!-- Place new controls here -->
+        <Frame VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"  BorderColor="Black" BackgroundColor="Transparent">
+            <StackLayout>
+                <Grid Margin="0,-18,0,0" VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Label TextDecorations="Underline" Text="ASSET TAGS READING" HorizontalTextAlignment="Center" TextColor="Red" FontAttributes="Bold" FontSize="25"></Label>
+                </Grid>
+                <Grid  VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Button BackgroundColor="DarkSeaGreen" x:Name="btnScan" Text="START READING"  HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Clicked="Button_Clicked" />
+                </Grid>
+                <Grid  VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition  Width="180"></ColumnDefinition>
+                        <ColumnDefinition Width="200"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Label x:Name="lblTagsCount" HorizontalTextAlignment="Start" FontSize="15" Grid.Column="0" FontAttributes="Bold" TextColor="DarkOrange"  Text="Tags Count : 0" VerticalOptions="Center" HorizontalOptions="StartAndExpand"/>
+                    <Label x:Name="lblReadcount" HorizontalTextAlignment="End" Grid.Column="1" FontSize="15" FontAttributes="Bold" TextColor="DarkOrange" Text="Total Read : 0" VerticalOptions="Center" HorizontalOptions="StartAndExpand"/>
+                </Grid>
+                <Grid Margin="0,0,0,0"  VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
+                    <BoxView BackgroundColor="White" Color="Black"   HorizontalOptions="Fill" VerticalOptions="FillAndExpand"></BoxView>
+                    <ListView BackgroundColor="White" x:Name="ListTag" 
+                              Header="" HasUnevenRows="True">
+                        <ListView.HeaderTemplate>
+                            <DataTemplate>
+                                <StackLayout Orientation="Vertical">
+                                    <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" Padding="5">
+                                        <Label FontAttributes="Bold" TextColor="Blue" Text="Tags" VerticalOptions="Center" HorizontalOptions="StartAndExpand"/>
+                                        <Label FontAttributes="Bold" TextColor="Blue" Text="Count" VerticalOptions="Center" HorizontalOptions="End"/>
+                                    </StackLayout>
+                                    <BoxView Color="Navy" HeightRequest="1" HorizontalOptions="Fill"/>
+                                </StackLayout>
+
+                            </DataTemplate>
+                        </ListView.HeaderTemplate>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Orientation="Horizontal" VerticalOptions="FillAndExpand" Padding="5">
+                                        <Label FontAttributes="Bold" TextColor="Black" Text="{Binding ItemArray[0]}" VerticalOptions="Center" HorizontalOptions="StartAndExpand"/>
+                                        <Label FontAttributes="Bold" TextColor="Black" Text="{Binding ItemArray[1]}" VerticalOptions="Center" HorizontalOptions="End"/>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
+                <Grid Margin="0,0,0,-10"  VerticalOptions="End" HorizontalOptions="CenterAndExpand">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Button BackgroundColor="Teal" TextColor="White" x:Name="btnSave" Text="SAVE" Grid.Column="0" Clicked="BtnSave_Clicked" />
+                    <Button BackgroundColor="Teal" TextColor="White" x:Name="btnClear" Text="CLEAR" Grid.Column="1" Clicked="BtnClear_Clicked" />
+                    <Button BackgroundColor="Teal" TextColor="White" x:Name="btnExit" Text="EXIT" Grid.Column="2" Clicked="BtnExit_Clicked" />
+                </Grid>
+            </StackLayout>
+        </Frame>
+
+    </StackLayout>
+
+</ContentPage>
