@@ -23,8 +23,8 @@ namespace Chiper_Lab_RFID_System.Droid
             {
                 //sDataStr = "";
                 // 把intent裡夾帶的資料取出來
-                if (Variable.Reading == "true")
-                {
+                //if (Variable.Reading == "true")
+                //{
                     int type = intent.GetIntExtra(GeneralString.ExtraDataType, -1);
                     int response = intent.GetIntExtra(GeneralString.ExtraResponse, -1);
                     double data_rssi = intent.GetDoubleExtra(GeneralString.ExtraDataRssi, 0);
@@ -37,20 +37,20 @@ namespace Chiper_Lab_RFID_System.Droid
                     int TID_length = intent.GetIntExtra(GeneralString.ExtraTidLength, 0);
                     int ReadData_length = intent.GetIntExtra(GeneralString.EXTRAReadDataLENGTH, 0);
 
-                    //Log.Debug(TAG, "++++ [Intent_RFIDSERVICE_TAG_DATA] ++++");
-                    //Log.Debug(TAG, "[Intent_RFIDSERVICE_TAG_DATA] type=" + type + ", response=" + response + ", data_rssi=" + data_rssi);
-                    //Log.Debug(TAG, "[Intent_RFIDSERVICE_TAG_DATA] PC=" + PC);
-                    //Log.Debug(TAG, "[Intent_RFIDSERVICE_TAG_DATA] EPC=" + EPC);
-                    //Log.Debug(TAG, "[Intent_RFIDSERVICE_TAG_DATA] EPC_length=" + EPC_length);
-                    //Log.Debug(TAG, "[Intent_RFIDSERVICE_TAG_DATA] TID=" + TID);
-                    //Log.Debug(TAG, "[Intent_RFIDSERVICE_TAG_DATA] TID_length=" + TID_length);
-                    //Log.Debug(TAG, "[Intent_RFIDSERVICE_TAG_DATA] ReadData=" + ReadData);
-                    //Log.Debug(TAG, "[Intent_RFIDSERVICE_TAG_DATA] ReadData_length=" + ReadData_length);
+                //Log.Debug(TAG, "++++ [Intent_RFIDSERVICE_TAG_DATA] ++++");
+                //Log.Debug(TAG, "[Intent_RFIDSERVICE_TAG_DATA] type=" + type + ", response=" + response + ", data_rssi=" + data_rssi);
+                //Log.Debug(TAG, "[Intent_RFIDSERVICE_TAG_DATA] PC=" + PC);
+                //Log.Debug(TAG, "[Intent_RFIDSERVICE_TAG_DATA] EPC=" + EPC);
+                //Log.Debug(TAG, "[Intent_RFIDSERVICE_TAG_DATA] EPC_length=" + EPC_length);
+                //Log.Debug(TAG, "[Intent_RFIDSERVICE_TAG_DATA] TID=" + TID);
+                //Log.Debug(TAG, "[Intent_RFIDSERVICE_TAG_DATA] TID_length=" + TID_length);
+                //Log.Debug(TAG, "[Intent_RFIDSERVICE_TAG_DATA] ReadData=" + ReadData);
+                //Log.Debug(TAG, "[Intent_RFIDSERVICE_TAG_DATA] ReadData_length=" + ReadData_length);
 
-                    //Scan_Data.Text += EPC + "\n";
-                    Variable.EPC = EPC;
+                //Scan_Data.Text += EPC + "\n";
+                CommonClass.CommonVariable.EPC = EPC;
                   //  Toast.MakeText(context, EPC, ToastLength.Short).Show();
-                }
+                //}
             }
 
             //else if (intent.Action == GeneralString.IntentRFIDSERVICECONNECTED)

@@ -25,7 +25,7 @@ namespace Chiper_Lab_RFID_System.Droid
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
-            Variable.m_RM  = RfidManager.InitInstance(this);
+            CommonClass.CommonVariable.m_RM  = RfidManager.InitInstance(this);
             myDataReceiver = new Receiver();
 
             filter = new IntentFilter();
@@ -83,7 +83,7 @@ namespace Chiper_Lab_RFID_System.Droid
             {
                 if (e.RepeatCount == 0)
                 {
-                    if (Variable.m_RM.ConnectionStatus)
+                    if (CommonClass.CommonVariable.m_RM.ConnectionStatus)
                     {
                         MainPage.handler.Start();
                         return true;
@@ -104,7 +104,7 @@ namespace Chiper_Lab_RFID_System.Droid
             UnregisterReceiver(myDataReceiver);
 
             // Reader Release
-            Variable.m_RM.Release();
+            CommonClass.CommonVariable.m_RM.Release();
         }
     }
 }

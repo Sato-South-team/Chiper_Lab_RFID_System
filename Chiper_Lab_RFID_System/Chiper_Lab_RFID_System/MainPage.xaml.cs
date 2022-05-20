@@ -19,6 +19,8 @@ namespace Chiper_Lab_RFID_System
         public static UIHand handler;
         int i = 0;
         bool Flag = false;
+        CommonClass.SoundsPlay obj = DependencyService.Get<CommonClass.SoundsPlay>();
+
         public MainPage()
         {
             InitializeComponent();
@@ -33,7 +35,7 @@ namespace Chiper_Lab_RFID_System
         {
             if (btnScan.Text == "STOP READING")
             {
-                Variable.m_RM.Release();
+                CommonClass.CommonVariable.m_RM.Release();
                 btnScan.Text = "START READING";
                 Flag = false;
             }
@@ -45,28 +47,30 @@ namespace Chiper_Lab_RFID_System
                 if (btnScan.Text == "STOP READING")
                 {
                     StopInventory();
-                    Variable.EPC = "";
-                    Variable.Reading = "false";// 停止识别
+                    CommonClass.CommonVariable.EPC = "";
+                   // Variable.Reading = "false";// 停止识别
                     return;
                 }
                 if (btnScan.Text == "START READING")
                 {
-                    if (Variable.m_RM.ConnectionStatus)
+                    if (CommonClass.CommonVariable.m_RM.ConnectionStatus)
                     {
                         btnScan.Text = "STOP READING";
                         Flag = true;
-                        Variable.Reading = "true" ;// 停止识别
+                       // Variable.Reading = "true" ;// 停止识别
                         ContinuousRead();
 
                     }
                     else
                     {
+                        obj.PlaySound("Error");
                         Toast.MakeText(Android.App.Application.Context, "Start failuer", ToastLength.Long).Show();
                     }
                 }
             }
             catch (Exception ex)
             {
+                obj.PlaySound("Error");
                 Toast.MakeText(Android.App.Application.Context, ex.Message.ToString(), ToastLength.Long).Show();
             }
 
@@ -80,12 +84,12 @@ namespace Chiper_Lab_RFID_System
                 {
                     try
                     {
-                        Thread.Sleep(200);
-                        int re = Variable.m_RM.RFIDDirectStartInventoryRound(InventoryType.EpcAndTid, 10);
+                        Thread.Sleep(500);
+                        int re = CommonClass.CommonVariable.m_RM.RFIDDirectStartInventoryRound(InventoryType.EpcAndTid, 10);
 
                         Message msg = handler.ObtainMessage();
                        // string[] res = Variable.uhfAPI.ReadTagFromBuffer();//.ReadTagFormBuffer();
-                        if (Variable.EPC != (null) && Variable.EPC != "")
+                        if (CommonClass.CommonVariable.EPC != (null) && CommonClass.CommonVariable.EPC != "")
                         {
                             string strEPC;
                             string strTid = "";
@@ -94,7 +98,7 @@ namespace Chiper_Lab_RFID_System
                             //{
                             //    strTid = "TID:" + res[0] + "\r\n";
                             //}
-                            strEPC = "EPC:" + Variable.EPC + "@";
+                            strEPC = "EPC:" + CommonClass.CommonVariable.EPC + "@";
                             //sb.Append(strTid);
                             sb.Append(strEPC);
                             //sb.Append(res[2]);
@@ -105,6 +109,7 @@ namespace Chiper_Lab_RFID_System
                     }
                     catch (Exception ex)
                     {
+                        obj.PlaySound("Error");
                         Toast.MakeText(Android.App.Application.Context, ex.Message, ToastLength.Long).Show();
                         StopInventory();
                         return;
@@ -117,6 +122,8 @@ namespace Chiper_Lab_RFID_System
         public class UIHand : Handler
         {
             MainPage mainpage;
+            CommonClass.SoundsPlay obj = DependencyService.Get<CommonClass.SoundsPlay>();
+
             public UIHand(MainPage _ScanTags)
             {
                 mainpage = _ScanTags;
@@ -152,8 +159,8 @@ namespace Chiper_Lab_RFID_System
                 }
                 catch (Exception ex)
                 {
-                    Toast.MakeText(Android.App.Application.Context, ex.Message, ToastLength.Long).Show();
-                    //mainpage.StopInventory();
+                    obj.PlaySound("Error");
+                    Toast.MakeText(Android.App.Application.Context, ex.Message, ToastLength.Long).Show();                    //mainpage.StopInventory();
                     return;
                 }
 
@@ -174,37 +181,42 @@ namespace Chiper_Lab_RFID_System
         }
         private void ContentPage_Appearing(object sender, EventArgs e)
         {
-            CreateDirectory();
-            if (!File.Exists(Android.OS.Environment.ExternalStorageDirectory.AbsolutePath + "/RFIDTags/Asset_Tags_Details.csv"))
+            try
             {
-                string str = "AssetTags" + "," + "ScannedCount" + "," + "ScannedOn";
-                StreamWriter SW = new StreamWriter(Android.OS.Environment.ExternalStorageDirectory.AbsolutePath + "/RFIDTags/Asset_Tags_Details.csv", true);
-                SW.WriteLine(str);
-                SW.Close();
+                //CreateDirectory();
+                if (!File.Exists(CommonClass.CommonVariable.Path + "/Asset_Tags_Details.csv"))
+                {
+                    string str = "AssetTags" + "," + "ScannedCount" + "," + "ScannedOn";
+                    StreamWriter SW = new StreamWriter(CommonClass.CommonVariable.Path + "/Asset_Tags_Details.csv", true);
+                    SW.WriteLine(str);
+                    SW.Close();
+                }
+            }
+            catch(Exception ex)
+            {
+                obj.PlaySound("Error");
+                Toast.MakeText(Android.App.Application.Context, ex.Message, ToastLength.Long).Show();
             }
         }
-        private void CreateDirectory()
-        {
-            if (!Directory.Exists(Android.OS.Environment.ExternalStorageDirectory.AbsolutePath + "/RFIDTags"))
-            {
-                Directory.CreateDirectory(Android.OS.Environment.ExternalStorageDirectory.AbsolutePath + "/RFIDTags");
-            }
-        }
+       
         private void BtnSave_Clicked(object sender, EventArgs e)
         {
             try
             {
-                StreamWriter SW = new StreamWriter(Android.OS.Environment.ExternalStorageDirectory.AbsolutePath + "/RFIDTags/Asset_Tags_Details.csv", true);
+                StreamWriter SW = new StreamWriter(CommonClass.CommonVariable.Path +  "/Asset_Tags_Details.csv", true);
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     SW.WriteLine(dt.Rows[i]["Tags"].ToString().Replace("\r\n", "-") + "," + dt.Rows[i]["Count"].ToString() + "," + System.DateTime.Now.ToString());
                 }
                 SW.Close();
+                obj.PlaySound("Success");
+
                 Toast.MakeText(Android.App.Application.Context, "SAVED SUCCESSFULLY", ToastLength.Long).Show();
                 BtnClear_Clicked(null, null);
             }
             catch (Exception ex)
             {
+                obj.PlaySound("Error");
                 Toast.MakeText(Android.App.Application.Context, ex.Message, ToastLength.Long).Show();
             }
         }
@@ -222,6 +234,7 @@ namespace Chiper_Lab_RFID_System
             }
             catch (Exception ex)
             {
+                obj.PlaySound("Error");
                 Toast.MakeText(Android.App.Application.Context, ex.Message, ToastLength.Long).Show();
             }
         }
@@ -231,11 +244,13 @@ namespace Chiper_Lab_RFID_System
             try
             {
                 StopInventory();
+                System.Diagnostics.Process.GetCurrentProcess().Kill();
                 //App.Current.MainPage = new MainPage();
 
             }
             catch (Exception ex)
             {
+                obj.PlaySound("Error");
                 Toast.MakeText(Android.App.Application.Context, ex.Message, ToastLength.Long).Show();
             }
         }

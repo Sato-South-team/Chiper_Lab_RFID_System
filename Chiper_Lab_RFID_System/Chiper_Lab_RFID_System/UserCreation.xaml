@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" Appearing="ContentPage_Appearing" x:Class="Chiper_Lab_RFID_System.UserCreation" BackgroundImage="BackGround.jpg">
+    <ScrollView>
+        <Frame  Margin="10,10,10,10" CornerRadius="60"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="White" >
+            <StackLayout VerticalOptions="FillAndExpand">
+          
+                <Grid  VerticalOptions="Start" HeightRequest="50" WidthRequest="200" Margin="0,0,0,0"   HorizontalOptions="CenterAndExpand"  >
+                    <Label  TextDecorations="Underline" HorizontalOptions="Center" TextColor="Red" FontAttributes="Bold" FontSize="25"   Text="USER CREATION" Grid.Row="0" ></Label>
+                </Grid>
+                <Grid  Margin="0,0,0,0"  VerticalOptions="Start" HorizontalOptions="StartAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"></RowDefinition>
+                        <RowDefinition Height="40"></RowDefinition>
+                        <RowDefinition Height="20"></RowDefinition>
+                        <RowDefinition Height="40"></RowDefinition>
+                        <RowDefinition Height="20"></RowDefinition>
+                        <RowDefinition Height="40"></RowDefinition>
+                        <RowDefinition Height="20"></RowDefinition>
+                        <RowDefinition Height="40"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Label TextColor="Blue" Text="User Name:" Grid.Row="0" ></Label>
+                    <Label TextColor="Blue" Text="User ID:" Grid.Row="2" ></Label>
+                    <Label TextColor="Blue"  Text="Password:" Grid.Row="4" ></Label>
+                    <Label TextColor="Blue"  Text="Confirm Password:" Grid.Row="6" ></Label>
+                    <Entry FontSize="15" Placeholder="ENTER USERNAME HERE" x:Name="txtUserName" Grid.Row="1" ></Entry>
+                    <Entry FontSize="15" Placeholder="ENTER USERID HERE" x:Name="txtUserID" Grid.Row="3" ></Entry>
+                    <Entry FontSize="15" Placeholder="ENTER PASSWORD HERE"  IsPassword="True" x:Name="txtPassword" Grid.Row="5" ></Entry>
+                    <Entry FontSize="15" Placeholder="ENTER CONFIRM PASSWORD HERE"  IsPassword="True" x:Name="txtConfiPassword" Grid.Row="7" ></Entry>
+                </Grid>
+                <Grid Margin="0,0,0,0" VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="80"></ColumnDefinition>
+                        <ColumnDefinition Width="80"></ColumnDefinition>
+                        <ColumnDefinition Width="80"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="btnSave" Clicked="BtnSave_Clicked" Grid.Column="0" Text="SAVE" BackgroundColor="DarkCyan" WidthRequest="80"></Button>
+                    <Button x:Name="btnClear" Clicked="BtnClear_Clicked" Grid.Column="1" Text="CLEAR" BackgroundColor="DarkCyan" WidthRequest="80"></Button>
+                    <Button x:Name="btnExit" Clicked="BtnExit_Clicked" Grid.Column="2" Text="EXIT" BackgroundColor="DarkCyan" WidthRequest="80"></Button>
+
+                </Grid>
+                <Grid VerticalOptions="EndAndExpand" HorizontalOptions="CenterAndExpand" Margin="0,0,0,0">
+                    <Image x:Name="Logo" Source="Logo.png"  Aspect="AspectFit" WidthRequest="200"   ></Image>
+                </Grid>
+
+            </StackLayout>
+        </Frame>
+    </ScrollView>
+
+</ContentPage>

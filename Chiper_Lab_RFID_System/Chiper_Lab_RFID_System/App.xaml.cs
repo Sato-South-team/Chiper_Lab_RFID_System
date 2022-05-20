@@ -18,7 +18,7 @@ namespace Chiper_Lab_RFID_System
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new Login();
         }
 
         protected override void OnStart()
@@ -66,7 +66,7 @@ namespace Chiper_Lab_RFID_System
             {
                 string result = string.Empty;
 
-                if (Variable.m_RM.ConnectionStatus)
+                if (CommonClass.CommonVariable.m_RM.ConnectionStatus)
                 {
                     result = "OK";
                 }
@@ -74,7 +74,7 @@ namespace Chiper_Lab_RFID_System
             }
             protected override void OnPostExecute(Java.Lang.Object result)
             {
-                Variable.ProDialg.Cancel();
+             //   Variable.ProDialg.Cancel();
                 if (result.ToString() != "OK")
                     Toast.MakeText(Android.App.Application.Context, "Init failure!", ToastLength.Short).Show();
             }

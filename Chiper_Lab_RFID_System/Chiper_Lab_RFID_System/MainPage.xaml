@@ -8,19 +8,19 @@
         <!-- Place new controls here -->
         <Frame VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"  BorderColor="Black" BackgroundColor="Transparent">
             <StackLayout>
-                <Grid Margin="0,-18,0,0" VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
+                <Grid Margin="0,-20,0,0" VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Label TextDecorations="Underline" Text="ASSET TAGS READING" HorizontalTextAlignment="Center" TextColor="Red" FontAttributes="Bold" FontSize="25"></Label>
+                    <Label TextDecorations="Underline" Text="ASSET TAGS READING" HorizontalTextAlignment="Center" TextColor="Red" FontAttributes="Bold" FontSize="22"></Label>
                 </Grid>
-                <Grid  VerticalOptions="StartAndExpand" HorizontalOptions="CenterAndExpand">
+                <Grid  VerticalOptions="Start" HorizontalOptions="CenterAndExpand">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="40"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Button BackgroundColor="DarkSeaGreen" x:Name="btnScan" Text="START READING"  HorizontalOptions="CenterAndExpand" VerticalOptions="Start" Clicked="Button_Clicked" />
                 </Grid>
-                <Grid  VerticalOptions="StartAndExpand" HorizontalOptions="FillAndExpand">
+                <Grid  VerticalOptions="Start" HorizontalOptions="FillAndExpand">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="30"></RowDefinition>
                     </Grid.RowDefinitions>
