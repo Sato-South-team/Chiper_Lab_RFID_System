@@ -98,7 +98,9 @@ namespace Chiper_Lab_RFID_System
                             //{
                             //    strTid = "TID:" + res[0] + "\r\n";
                             //}
-                            strEPC = "EPC:" + CommonClass.CommonVariable.EPC + "@";
+                            byte[] data = FromHex(CommonClass.CommonVariable.EPC);
+                            string EPCString = Encoding.ASCII.GetString(data);
+                            strEPC = "EPC:" + EPCString + "@";
                             //sb.Append(strTid);
                             sb.Append(strEPC);
                             //sb.Append(res[2]);
@@ -118,6 +120,16 @@ namespace Chiper_Lab_RFID_System
                 }
             }));
             th.Start();
+        }
+        public static byte[] FromHex(string hex)
+        {
+            //hex = hex.Replace("-", "");
+            byte[] raw = new byte[hex.Length / 2];
+            for (int i = 0; i < raw.Length; i++)
+            {
+                raw[i] = Convert.ToByte(hex.Substring(i * 2, 2), 16);
+            }
+            return raw;
         }
         public class UIHand : Handler
         {
